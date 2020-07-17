@@ -3,16 +3,19 @@
 
 1) Which field of the Customers table is the primary key?
 Ans . Cnum is the primary key of Customer table.
-------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 
 2) What is the 4th column of the Customers table?
 Ans. RATING is the 4 th column of customer table.
-----------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------
 
 3) What is another word for row? For column?
 Ans. 	row= tuple,entity,opportunity
    	column=attribute,method
-----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
 
 4) Why isn’t it possible to see the first five rows of a table?
-Ans. 
+Ans.
+ The rows are not stored sequentially in the memory of a database server.
+So there is no way we can find out when the rows were inserted in the table. 
+Hence finding the first 5 rows is not possible.
