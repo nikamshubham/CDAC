@@ -1,0 +1,18 @@
+************************************************** Assign No 10 ***********************************************
+
+#1.
+select * from salespeople;
+
+SELECT m.sname,n.sname,n.scity
+FROM salespeople m, salespeople n
+WHERE m.City=n.City
+  and m.sname>n.sname;
+  
+#2.
+select * from customers;
+select cname,city,rating from customers
+where rating = (Select rating from customers where cname = 'Hoffman');
+	# or
+select cname,city,rating from customers
+where rating in (select * from customers where cname = 'Hoffman') ;
+select rating from customers where cname = 'Hoffman';

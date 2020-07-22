@@ -23,22 +23,3 @@ and number.
   FROM orders 
   GROUP BY odate 
   ORDER BY odate;
-
-
-
-#1.
-select * from salespeople;
-select * from orders;
-
-
-
-#2.
-select * from customers;
-
-
-#3.
-
-
-#4.
-select * from orders;
-
