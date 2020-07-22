@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *************************************************Assignment –8***********************************************
 ********************************************Formatting Query output.*******************************************
 
@@ -23,3 +24,49 @@ and number.
   FROM orders 
   GROUP BY odate 
   ORDER BY odate;
+=======
+*************************************************Assignment –8***********************************************
+********************************************Formatting Query output.*******************************************
+
+1) Assume each salesperson has a 12% commission. Write a query on the orders table that will produce the order number, the 
+salesperson number, and the amount of the salesperson’s commission for that order.
+# select onum,snum,amt,(amt*12)/100 as commission from orders; 
+
+2) Write a query on the Customers table that will find the highest rating in each city. Put the output in this form:
+For the city (city), the highest rating is : (rating).
+#select city, max(rating) as rating 
+  from customers
+  group by rating;
+
+3) Write a query that lists customers in descending order of rating. Output the rating field first, followed by the customer’s name 
+and number.
+#select * from customers;
+  select rating,cname 
+  from customers
+  order by rating desc;
+
+4) Write a query that totals the orders for each day and places the results in descending order.
+#SELECT count(odate) "TOTAL ORDERS", odate 
+  FROM orders 
+  GROUP BY odate 
+  ORDER BY odate;
+
+
+
+#1.
+select * from salespeople;
+select * from orders;
+
+
+
+#2.
+select * from customers;
+
+
+#3.
+
+
+#4.
+select * from orders;
+
+>>>>>>> b5f794df8ef2540a6f1d8bbfbcc5a526f6792916

@@ -1,0 +1,201 @@
+show databases;
+use cdac;
+show tables;
+
+###################### Exercise 1 ############################3
+
+# SEMP Table is created #
+create table SEMP 
+(
+EMPNO CHAR(4),
+EMPNAME CHAR(20),
+BASIC FLOAT(9,2),
+DEPTNO CHAR(2),
+DEPTHEAD CHAR(4)
+);
+
+# SDEPT Table is created #
+create table SDEPT
+(
+DEPTNO CHAR(2),
+DEPTNAME CHAR(15)
+);
+
+# Insert into SDEPT table #
+insert into SDEPT(DEPTNO,DEPTNAME)
+values	(10, 'Development'),
+	(20, 'Training');
+
+# Insert data into SEMP #
+Insert into SEMP(EMPNO,EMPNAME,BASIC,DEPTNO,DEPTHEAD)
+values(0001, 'SUNIL', 6000, '10', NULL),
+	  (0002, 'HIREN', 8000, '20', NULL),
+	  (0003, 'ALI', 4000, '10', '0001'),
+	  (0004, 'GEORGE',6000, NULL,'0002'); 
+      
+# creating s,p,j,spj table and inserting data #
+create table S
+(
+`s#` varchar(20),
+Sname varchar(20),
+Status varchar(20),
+city varchar(20)
+);      
+
+insert into S values('S1','Shubham','10','London');
+insert into S values('S2','Arpita','20','Paris');
+insert into S values('S3','Pranita','30','Athens');
+insert into S values('S4','billa','40','Europe');
+
+create table P
+(
+`p#` varchar(20),
+Pname varchar(20),
+Color varchar(20),
+weight int(10),
+city varchar(20)
+);
+
+insert into P values('P1','abc','Black','2','London');
+insert into P values('P2','def','Blue','5','Athens');
+insert into P values('P3','ghi','White','7','Paris');
+insert into P values('P4','ssd','White','7','dubai');
+insert into P values('P5','scanner','White','7','mumbai');
+
+create table J
+(
+`J#` varchar(20),
+Jname varchar(20),
+city varchar(20)
+);
+
+insert into j values('J1','Mfg_mgmt','Athens');
+insert into j values('J2','Lib_mgmt','London');
+insert into j values('J3','Canteen_mgmt','Paris');
+
+CREATE TABLE SPJ
+(
+`S#`	CHAR(2),
+`P#` 	CHAR(2),
+`J#` 	CHAR(2),
+QTY	INT(5)
+);
+
+# Display all the data from the S table. #
+select * from S;
+
+# Display only the S# and SNAME fields from the S table.#
+select `s#`,sname from S;
+
+# Display the PNAME and COLOR from the P table for the CITY=”London”. #
+select pname,color from p;
+
+# Display all the Suppliers from London. #
+select * from S where city = 'London';
+
+# Display all the Suppliers from Paris or Athens. #
+select * from S where city in('Paris','Athens');
+
+# Display all the Projects in Athens. #
+select * from P where city = 'Athens';
+
+# Display all the Partnames with the weight between 12 and 14 (inclusive of both). #
+select Pname from P where weight between 12 and 14;
+
+# Display all the Suppliers with a Status greater than or equal to 20. #
+select * from S where status >= 20;
+
+# Display all the Suppliers except the Suppliers from London. #
+select * from S where city not in('London');
+
+# Display only the Cities from where the Suppliers come from. #  
+select sname,city from S;
+
+# Assuming that the Part Weight is in GRAMS, display the same  in MILLIGRAMS and KILOGRAMS. #
+select weight*1000 as 'MILLIGRAM' , weight*0.001 as 'KILOGRAM' from p;
+
+******************************************************************************************
+
+########################################### Exercise No:- 2 ########################################
+
+# 1. Display the Supplier table in the descending order of CITY. #
+select * from S order by city desc;
+
+# 2. Display the Part Table in the ascending order of CITY and within the city in the ascending order of Part names. #
+select * from P order by city  and Pname desc;
+
+# 3. Display all the Suppliers with a status between 10 and 20. #
+select * from S where status between 10 and 20;
+	or 
+select * from S where status in('10','20'); 
+
+# 4. Display all the Parts and their Weight, which are not in the range of 10 and 15. #
+select Pname,weight from P where range not in(10,15);
+
+select * from P;
+
+# 5. Display all the Part names starting with the letter ‘S’.#
+select pname from P where pname>='S' and pname < 't';
+
+# 6. Display all the Suppliers, belonging to cities starting with the letter ‘L’.#
+select * from S where city like 'L%';
+	or
+select * from S where city >= 'L' and city < 'M';
+
+# 7. Display all the Projects, with the third letter in JNAME as ‘n’. #
+select * from J where Jname = 'L%';
+select * from J;
+
+********************************************************************************************
+
+################################ Exercise No:- 03 ###################################
+# 1. Display all the Supplier names with the initial letter capital. #
+
+select concat(upper(substring(sname,1,1)),LOWER(SUBSTRING(sname,2))) from s;
+Select concat(Upper(Substring(sname,1,1)),lower(Substring(sname,2,length(sname)))) from s;
+
+select * from s;
+
+# 2. Display all the Supplier names in upper case. #
+select upper(sname) as 'Supplier Names' from s;
+
+# 3. Display all the Supplier names in lower case. #
+select lower(sname) as 'Supplier Names' from s;
+
+# 4. Display all the Supplier names padded to 25 characters, with spaces on the left. #
+select lpad(sname,25,' ') 'supplier name'from s;
+
+# 5. Display all the Supplier names (with ‘la’ replaced by ‘ro’). #
+select replace(Sname,'la','ro') from s; 
+
+# 6. Implement the above command such that ‘l’ is replaced with ‘r’ and ‘a’ is replaced with ‘o’. #
+select replace(replace(sname,'t','r'),'a','o') from s;
+
+# 7. Display the Supplier names and the lengths of the names. #
+select sname,length(Sname) as length from s;
+
+# 8. Use the soundex function to search for a supplier by the name of ‘BLOKE’. #
+SELECT sname FROM S WHERE SOUNDEX(sname)= SOUNDEX('BLOKE');
+select * from s;
+
+# 9. Display the Supplier name and the status (as Ten, Twenty, Thirty, etc.). #
+select sname , case
+when status = 10 then 'Ten'
+when status = 20 then 'Twenty'
+when status = 30 then 'Thirty'
+when status = 40 then 'Fourty'
+when status = 50 then 'Fifty'
+when status = 60 then 'Sixty'
+when status = 70 then 'Seventy'
+when status = 80 then 'Eighty'
+when status = 90 then 'Ninety'
+when status = 100 then 'Hundred'
+end as status
+from s;
+
+# 10. Display the current day (e.g. Thursday). #
+select dayname(curdate())from dual;
+	#or
+select dayname(sysdate());
+
+**********************************************************************************************
