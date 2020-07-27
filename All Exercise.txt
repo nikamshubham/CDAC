@@ -2,7 +2,7 @@ show databases;
 use cdac;
 show tables;
 
-###################### Exercise 1 ############################3
+###################### Exercise 1 #############################
 
 # SEMP Table is created #
 create table SEMP 
@@ -199,3 +199,84 @@ select dayname(curdate())from dual;
 select dayname(sysdate());
 
 **********************************************************************************************
+
+###################### Exercise 4  #############################
+
+#1. Display the minimum Status in the Supplier table.#
+select sname,min(status) as MIN_STATUS from s;
+
+#2. Display the maximum Weight in the Parts table.#
+select * from p;
+select max(weight) from p;
+
+#3.Display the average Weight of the Parts.#
+select avg(weight) from p;
+
+#4. Display the total Quantity sold for part ‘P1’.#
+select sum(QTY) from spj where `p#`= 'p1';
+
+#5. Display the total Quantity sold for each part.#
+select * from spj;
+select * from p;
+
+select count(Qty),`P#` from spj
+group by `P#`;
+
+#6. Display the average Quantity sold for each part.#
+select `p#` parts,avg(qty) Average from spj group by `P#`;
+
+#8. Display the Status and the count of Suppliers with that Status.#
+select status, count(suppliers) from s ;
+select city,count(`J#`) from j group by city;
+select status,count(`S#`) from s ;
+
+select * from p;
+select city , count(*) from projects group by city ;
+
+#9.
+select city , count(*) from p group by city ;
+
+#10
+select * from s;
+update s set status = null where sname = 'billa'; 
+select count(*) from s;
+# count(*) give all rows including null value in any row
+select count(sname) from s;
+# count(col_name) give all rows excluding the row that contain null vlaue in that column name
+
+#11.
+select status,count from s;
+select * from s;
+select * from spj;
+
+select case
+when status = 10 then 'Ten'
+when status = 20 then 'Twenty'
+when status = 30 then 'Thirty'
+when status = 40 then 'Forty'
+end status , suppartspro.qty
+ from s sup,spj suppartspro
+where sup.`s#` = suppartspro.`s#`
+group by status,qty;
+
+update spj set qty = '1' where qty= '10';
+update spj set qty = '2' where qty= '20';
+update spj set qty = '3' where qty= '30';
+
+********************************************************************************
+
+###################### Exercise 5  #############################
+
+1. Display the Supplier name and the Quantity sold.
+
+
+2. Display the Part name and Quantity sold.
+3. Display the Project name and Quantity sold.
+4. Display the Supplier name, Part name, Project name and Quantity sold.
+5. Display the Supplier name, Supplying Parts to a Project in the same City.
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold.
+7. Display all the Quantity sold by Suppliers with the Status = 20.
+8. Display all the Parts and Quantity with a Weight > 14.
+9. Display all the Project names and City, which has bought more than 500 Parts.
+10. Display all the Part names and Quantity sold that have a Weight less than 15.
+11. Display all the Employee names and the name of their Managers.

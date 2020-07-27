@@ -1,0 +1,30 @@
+************************************************* Assign No 11 ********************************************
+************************************************* Subqueries ***********************************************
+#1.
+select * from customers;
+select * from orders;
+select cnum, cname from customers;
+select cnum,count(*) orders from orders where cnum = 
+(select cnum from customers where cname = 'Cisneros');
+select cnum from customers where cname = 'Cisneros';
+
+------------------------------------------------------
+#2.
+select cname,rating from customers where cnum in
+	(select cnum from orders where amt >
+			(select avg(amt) from orders));
+
+select * from orders;
+select cnum from orders where amt > 
+(select avg(amt) from orders);
+----------------------------------------------
+#3.
+select * from salespeople;
+select * from orders;
+select * from customers;
+
+SELECT sum(amt)
+FROM orders
+GROUP BY snum
+HAVING sum(amt)>
+(SELECT max(amt) FROM orders);
