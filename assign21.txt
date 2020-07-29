@@ -1,0 +1,40 @@
+-- Assignment - 21
+-- Grant and Revoke.
+-------------------------------------------------------------------------------------------------
+1) Give Amit the right to change the ratings of the customers.
+->
+select * from customers;
+grant update on customers to Amit;
+--- or
+create view v1
+as
+select cnum,cname,rating from customers;  
+grant select,update on v1 to Amit;
+-------------------------------------------------------------------------------------------------------
+2) Give Manoj the right to give other users the right to query the Orders table.
+->
+grant select on orders to manoj;
+------------------------------------------------------------------------------------------------------
+3) Take the INSERT privilege on Salespeople away from Ajita.
+->
+revoke insert on salespeople from Ajita;
+------------------------------------------------------------------------------------------------------
+4) Grant Abhijeet the right to insert or update the Customers table while keeping her
+possible rating values in the range of 100 to 500.
+->
+create or replace view customer11
+as
+select * from customers where rating between 100 and 500 with check option;
+select * from customer11;
+
+Grant insert,update on customer11 to abhijit;
+-----------------------------------------------------------------------------------------------------
+5) Allow Vikram to query the Customers table, but restrict his access to those
+customers whose rating is the lowest.
+->
+CREATE OR REPLACE VIEW minres AS
+SELECT * FROM customers
+WHERE rating <> (SELECT min(rating) FROM customers);
+grant SELECT ON restrictmin TO Vikaram;
+---------------------------------------------------------------------------------------------------
+
